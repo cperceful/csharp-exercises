@@ -14,7 +14,6 @@ namespace Restaurant
 
         public void AddItem(MenuItem item)
         {
-            //TODO: this doesn't work. Fix it
             menuItems.Add(item);
             lastUpdated = DateTime.Now.Date;
         }
