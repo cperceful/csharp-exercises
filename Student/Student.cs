@@ -6,33 +6,54 @@ namespace Student
 {
     class Student
     {
+        public static int nextStudentId = 1;
 
-        private string name;
-        private int studentId;
-        private int numberOfCredits;
-        private double gpa;
+        public string Name { get; set; }
 
-        public string Name
+        public int StudentId{ get; set; }
+
+        public int NumberOfCredits{ get; set; }
+
+        public double Gpa { get; set; }
+
+        public Student(string name, int studentId, int numberOfCredits, double gpa)
         {
-            get; set;
+            Name = name;
+            StudentId = studentId;
+            NumberOfCredits = numberOfCredits;
+            Gpa = gpa;
         }
 
-        public int StudentId
-        {
-            get { return studentId; }
+        public Student(string name, int studentId) 
+            : this(name, studentId, 0, 0) { }
 
-            internal set { studentId = value; }
+        public Student(string name) : this(name, nextStudentId)
+        {
+            nextStudentId++;
         }
 
-        public int NumberOfCredits
+        public void AddGrade(int courseCredits, double grade)
         {
-            get; set;
+            NumberOfCredits += courseCredits;
+            double totalQualityScore = Gpa * NumberOfCredits;
+            totalQualityScore += grade;
+            Gpa = (totalQualityScore / NumberOfCredits);
         }
 
-        public double Gpa
+        public override bool Equals(Object o)
         {
-            get; set;
+            Student studentObject = o as Student;
+            return StudentId == studentObject.StudentId;
         }
 
+        public override string ToString()
+        {
+            return $"Name: {Name}(Credits: {NumberOfCredits}, GPA: {Gpa})";
+        }
     }
+
+
+
+
+    
 }
